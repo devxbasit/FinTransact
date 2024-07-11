@@ -1,0 +1,6 @@
+@FinTransact.EmailApi_HostAddress = http://localhost:5141
+
+GET {{FinTransact.EmailApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
