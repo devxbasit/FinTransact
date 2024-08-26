@@ -148,11 +148,14 @@ coupon management.
 
 #### Commands
 
-Run in OrderApi & CouponApi
-
+Run in AuthAPI
 ```
 dotnet user-secrets init
-dotnet user-secrets set "Stripe:SecretKey" "stripe secret key here"
+dotnet user-secrets set "ConnectionStrings:AuthApiDbConnectionString" "stripe secret key here"
+dotnet user-secrets set "ApiSettings:JwtOptions:Secret" "FinTransact secret key here"
+dotnet user-secrets set "RabbitMQSettings:RabbitMQConnectionOptions:UserName" "username here"
+dotnet user-secrets set "RabbitMQSettings:RabbitMQConnectionOptions:Password" "password here"
+
 ```
 
 #### Other Stuff

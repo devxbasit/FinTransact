@@ -1,9 +1,41 @@
+using FinTransact.AuthApi;
+using FinTransact.AuthApi.Data;
+using FinTransact.AuthApi.Extensions;
+using FinTransact.AuthApi.Models;
+using FinTransact.AuthApi.Services;
+using FinTransact.AuthApi.Services.IService;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+
+builder.Services.AddControllers();
+
+
+// service extension methods in action here
+builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureIdentity();
+builder.Services.ConfigureAuthentication();
+builder.Services.ConfigureAuthorization();
+builder.Services.ConfigureCORS();
+
+
+// Adding services for DI
+builder.Services.AddScoped<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+
+// configuring options
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
+builder.Services.Configure<RabbitMQConnectionOptions>(builder.Configuration.GetSection("RabbitMQSettings:RabbitMQConnectionOptions"));
+
 
 var app = builder.Build();
 
@@ -14,31 +46,36 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHsts();
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
+await ApplyPendingMigrations();
+await AddDefaultUserAndRole();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+async Task ApplyPendingMigrations()
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        if (db.Database.GetPendingMigrations().Count() > 0)
+        {
+            Console.WriteLine("--> Applying pending migrations...");
+            db.Database.Migrate();
+        }
+    }
+
+    await Task.CompletedTask;
+}
+
+async Task AddDefaultUserAndRole()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        await SeedData.Initialize(scope.ServiceProvider, app.Configuration);
+    }
 }

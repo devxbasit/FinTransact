@@ -1,4 +1,4 @@
-namespace NikeStore.Services.EmailApi.Models;
+namespace FinTransact.AuthApi.Models;
 
 public class RabbitMQConnectionOptions
 {

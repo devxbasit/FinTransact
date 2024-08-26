@@ -1,4 +1,4 @@
-namespace NikeStore.Services.AuthApi.Models.Dto;
+namespace FinTransact.AuthApi.Dto;
 
 public class ResponseDto
 {

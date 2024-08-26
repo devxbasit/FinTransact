@@ -1,12 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FinTransact.AuthApi.Models;
+using FinTransact.AuthApi.Services.IService;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using NikeStore.Services.AuthApi.Models;
-using NikeStore.Services.AuthApi.Services.IService;
 
-namespace NikeStore.Services.AuthApi.Services;
+namespace FinTransact.AuthApi.Services;
 
 public class JwtTokenGeneratorService : IJwtTokenGeneratorService
 {

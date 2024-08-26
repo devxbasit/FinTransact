@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CF2A4C7A-AA59-4DD5-A9B6-AE11C2B3589B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{CF2A4C7A-AA59-4DD5-A9B6-AE11C2B3589B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTransact.AuthApi", "FinTransact.AuthApi\FinTransact.AuthApi.csproj", "{1376E62A-882C-4FB6-BAAC-67A03E9FE9B1}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTransact.LoggingApi", "FinTransact.LoggingApi\FinTransact.LoggingApi.csproj", "{3AB0C7AD-B7FA-445A-B503-0648AA2D55CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTransact.GatewaySolution", "FinTransact.GatewaySolution\FinTransact.GatewaySolution.csproj", "{0E1F5549-7C14-4784-837B-040D09581857}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{0D2EC4CC-B85F-4C2F-A11A-7B54027AE5D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{D7F9B67B-37D7-443D-A80A-10701469C56F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,8 +34,8 @@ Global
 		{15D8FE9D-CE9D-460F-97B4-4C84019C8C03} = {CF2A4C7A-AA59-4DD5-A9B6-AE11C2B3589B}
 		{58958BEE-2225-4DE2-BF62-145E483387CF} = {CF2A4C7A-AA59-4DD5-A9B6-AE11C2B3589B}
 		{F3DBBF6F-B0AE-4607-BF5C-9686A9B8D092} = {CF2A4C7A-AA59-4DD5-A9B6-AE11C2B3589B}
-		{0E1F5549-7C14-4784-837B-040D09581857} = {CF2A4C7A-AA59-4DD5-A9B6-AE11C2B3589B}
 		{3AB0C7AD-B7FA-445A-B503-0648AA2D55CB} = {CF2A4C7A-AA59-4DD5-A9B6-AE11C2B3589B}
+		{0E1F5549-7C14-4784-837B-040D09581857} = {D7F9B67B-37D7-443D-A80A-10701469C56F}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1376E62A-882C-4FB6-BAAC-67A03E9FE9B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

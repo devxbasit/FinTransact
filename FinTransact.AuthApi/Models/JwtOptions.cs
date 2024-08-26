@@ -1,6 +1,4 @@
-using Microsoft.IdentityModel.Tokens;
-
-namespace NikeStore.Services.AuthApi.Models;
+namespace FinTransact.AuthApi.Models;
 
 public class JwtOptions
 {

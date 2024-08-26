@@ -1,6 +1,11 @@
 namespace FinTransact.AuthApi;
 
-public class StaticData
+public static class StaticData
 {
-    
+    public enum DefaultRoles
+    {
+        SUPER_ADMIN,
+        ADMIN,
+        USER
+    }
 }
